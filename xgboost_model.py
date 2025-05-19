@@ -4,12 +4,24 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import time
 import numpy as np
 import pandas as pd
-import cupy
+# Conditional import for cupy to make it optional
 
 class XGBoostModel:
     def __init__(self, random_state=2021, use_gpu=True):
         self.random_state = random_state
         self.use_gpu = use_gpu
+        # Try to import cupy if GPU is enabled
+        if self.use_gpu:
+            try:
+                import cupy
+                self.has_cupy = True
+            except ImportError:
+                print("Warning: CuPy module not found. Disabling GPU acceleration.")
+                self.use_gpu = False
+                self.has_cupy = False
+        else:
+            self.has_cupy = False
+        
         self.model = None
         self.training_time = 0
         self.best_params = None

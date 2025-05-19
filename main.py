@@ -342,8 +342,8 @@ print(x_train_encoded_std[scale_features].skew())
 print("\n========== Training and Evaluating Models ==========\n")
 
 # XGBoost Model with GPU acceleration
-print("\n--- XGBoost Model (GPU-Accelerated) ---\n")
-xgb_model = XGBoostModel(random_state=2021, use_gpu=True)  # Explicitly enable GPU
+print("\n--- XGBoost Model (CPU) ---\n")
+xgb_model = XGBoostModel(random_state=2021, use_gpu=False)  # Disable GPU since CuPy is not installed
 xgb_model.train(x_train_encoded, y_train)
 xgb_results = xgb_model.evaluate(x_train_encoded, y_train, x_test_encoded, y_test)
 

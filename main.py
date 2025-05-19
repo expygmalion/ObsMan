@@ -6,15 +6,15 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler
 from sklearn.feature_selection import SelectKBest, f_classif, chi2
 
 # Import our model classes
-from xgboost_model import XGBoostModel
-from svm_model import SVMModel
-from logistic_regression_model import LogisticRegressionModel
-from knn_model import KNNModel
-from random_forest_model import RandomForestModel
+from models.xgboost_model import XGBoostModel
+from models.svm_model import SVMModel
+from models.logistic_regression_model import LogisticRegressionModel
+from models.knn_model import KNNModel
+from models.random_forest_model import RandomForestModel
 
 # Load train and test datasets
-train_df = pd.read_csv('train_dataset.csv')
-test_df = pd.read_csv('test_dataset.csv')
+train_df = pd.read_csv('data/train_dataset.csv')
+test_df = pd.read_csv('data/test_dataset.csv')
 
 print("Train shape:", train_df.shape)
 print("Test shape:", test_df.shape)

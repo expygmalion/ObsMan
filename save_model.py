@@ -2,7 +2,7 @@ import pickle
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from xgboost_model import XGBoostModel
+from models.xgboost_model import XGBoostModel
 
 # This script should be run after main.py to save the trained model
 
@@ -10,8 +10,8 @@ def save_trained_model():
     print("Loading and processing data...")
     
     # Load train and test datasets
-    train_df = pd.read_csv('train_dataset.csv')
-    test_df = pd.read_csv('test_dataset.csv')
+    train_df = pd.read_csv('data/train_dataset.csv')
+    test_df = pd.read_csv('data/test_dataset.csv')
     
     # Convert target to numeric
     target_mapping = {cat: i for i, cat in enumerate(train_df['NObeyesdad'].unique())}
@@ -62,17 +62,17 @@ def save_trained_model():
     
     print("Saving model and preprocessing components...")
     # Save model, encoders, and scaler
-    with open('xgb_model.pkl', 'wb') as f:
+    with open('saved_models/xgb_model.pkl', 'wb') as f:
         pickle.dump(xgb_model, f)
     
-    with open('encoders.pkl', 'wb') as f:
+    with open('saved_models/encoders.pkl', 'wb') as f:
         pickle.dump(encoders, f)
     
-    with open('scaler.pkl', 'wb') as f:
+    with open('saved_models/scaler.pkl', 'wb') as f:
         pickle.dump(scaler, f)
     
     # Save column names for reference
-    with open('feature_columns.txt', 'w') as f:
+    with open('saved_models/feature_columns.txt', 'w') as f:
         f.write('\n'.join(x_train_encoded.columns))
     
     print("Model and preprocessing components saved successfully.")

@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from xgboost_model import XGBoostModel
+from models.xgboost_model import XGBoostModel
 
 class ObesityPredictionApp(QMainWindow):
     def __init__(self):
@@ -173,11 +173,11 @@ class ObesityPredictionApp(QMainWindow):
         try:
             # Try to load saved model
             import pickle
-            with open('xgb_model.pkl', 'rb') as f:
+            with open('saved_models/xgb_model.pkl', 'rb') as f:
                 self.xgb_model = pickle.load(f)
-            with open('encoders.pkl', 'rb') as f:
+            with open('saved_models/encoders.pkl', 'rb') as f:
                 self.encoders = pickle.load(f)
-            with open('scaler.pkl', 'rb') as f:
+            with open('saved_models/scaler.pkl', 'rb') as f:
                 self.scaler = pickle.load(f)
             print("Loaded saved model and encoders")
         except:
@@ -186,7 +186,7 @@ class ObesityPredictionApp(QMainWindow):
             QMessageBox.warning(
                 self, 
                 "Model Not Found", 
-                "The prediction model was not found. Please run the main.py script first to train the model."
+                "The prediction model was not found. Please run the save_model.py script first to train the model."
             )
             # We will use the model created in __init__ with default parameters
     
@@ -241,7 +241,7 @@ class ObesityPredictionApp(QMainWindow):
             
             # Load the expected columns from the saved file if it exists
             try:
-                with open('feature_columns.txt', 'r') as f:
+                with open('saved_models/feature_columns.txt', 'r') as f:
                     expected_columns = f.read().splitlines()
                 print(f"Model expects {len(expected_columns)} columns")
             except:

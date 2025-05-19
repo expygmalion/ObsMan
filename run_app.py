@@ -1,11 +1,10 @@
-
 import os
 import sys
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
 def main():
     # Check if the model exists
-    if not os.path.exists('xgb_model.pkl') or not os.path.exists('encoders.pkl'):
+    if not os.path.exists('saved_models/xgb_model.pkl') or not os.path.exists('saved_models/encoders.pkl'):
         print("Model files not found. Running save_model.py first...")
         
         # If in interactive terminal, ask user if they want to run save_model.py
